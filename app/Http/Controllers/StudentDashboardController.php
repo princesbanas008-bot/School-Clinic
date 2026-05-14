@@ -12,6 +12,12 @@ class StudentDashboardController extends Controller
      */
     public function index()
     {
-        return view('student.dashboard');
+        $user = auth()->user();
+        $stats = [
+            'total_visits' => $user->visits()->count(),
+            'last_visit' => $user->visits()->latest('visit_date')->first(),
+        ];
+
+        return view('student.dashboard', compact('stats'));
     }
 }

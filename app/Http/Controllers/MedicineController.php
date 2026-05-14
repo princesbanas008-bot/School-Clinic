@@ -46,15 +46,15 @@ class MedicineController extends Controller
     /**
      * Show the form for editing the specified medicine.
      */
-    public function edit(Medicine $medicine)
+    public function edit(Medicine $inventory)
     {
-        return view('admin.inventory.edit', compact('medicine'));
+        return view('admin.inventory.edit', ['medicine' => $inventory]);
     }
 
     /**
      * Update the specified medicine in storage.
      */
-    public function update(Request $request, Medicine $medicine)
+    public function update(Request $request, Medicine $inventory)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -63,7 +63,7 @@ class MedicineController extends Controller
             'low_stock_threshold' => 'required|integer|min:0',
         ]);
 
-        $medicine->update($request->all());
+        $inventory->update($request->all());
 
         return redirect()->route('admin.inventory.index')->with('success', 'Inventory updated successfully.');
     }
@@ -71,9 +71,9 @@ class MedicineController extends Controller
     /**
      * Remove the specified medicine from storage.
      */
-    public function destroy(Medicine $medicine)
+    public function destroy(Medicine $inventory)
     {
-        $medicine->delete();
+        $inventory->delete();
         return redirect()->route('admin.inventory.index')->with('success', 'Medicine removed from inventory.');
     }
 }
