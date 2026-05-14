@@ -62,4 +62,40 @@ class VisitController extends Controller
         $visits = auth()->user()->visits()->latest()->paginate(10);
         return view('student.visits.history', compact('visits'));
     }
+
+    /**
+     * Show the form for editing the specified visit.
+     */
+    public function edit(Visit $visit)
+    {
+        $students = User::where('role', 'student')->orderBy('name')->get();
+        return view('admin.visits.edit', compact('visit', 'students'));
+    }
+
+    /**
+     * Update the specified visit in storage.
+     */
+    public function update(Request $request, Visit $visit)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:users,id',
+            'visit_date' => 'required|date',
+            'symptoms' => 'required|string',
+            'diagnosis' => 'required|string',
+            'treatment' => 'required|string',
+        ]);
+
+        $visit->update($request->all());
+
+        return redirect()->route('admin.visits.index')->with('success', 'Visit updated successfully.');
+    }
+
+    /**
+     * Remove the specified visit from storage.
+     */
+    public function destroy(Visit $visit)
+    {
+        $visit->delete();
+        return redirect()->route('admin.visits.index')->with('success', 'Visit record deleted.');
+    }
 }

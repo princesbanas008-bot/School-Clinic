@@ -38,6 +38,7 @@
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Symptoms</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Diagnosis</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Treatment</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -48,6 +49,14 @@
                                             <td class="px-6 py-4 text-sm text-gray-500">{{ Str::limit($visit->symptoms, 30) }}</td>
                                             <td class="px-6 py-4 text-sm text-gray-500">{{ Str::limit($visit->diagnosis, 30) }}</td>
                                             <td class="px-6 py-4 text-sm text-gray-500">{{ Str::limit($visit->treatment, 30) }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <a href="{{ route('admin.visits.edit', $visit) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                                                <form id="delete-form-visit-{{ $visit->id }}" action="{{ route('admin.visits.destroy', $visit) }}" method="POST" class="inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" onclick="confirmDelete('visit-{{ $visit->id }}')" class="text-rose-600 hover:text-rose-900">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

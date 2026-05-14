@@ -29,6 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
         Route::get('/visits/create', [VisitController::class, 'create'])->name('visits.create');
         Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
+        Route::get('/visits/{visit}/edit', [VisitController::class, 'edit'])->name('visits.edit');
+        Route::patch('/visits/{visit}', [VisitController::class, 'update'])->name('visits.update');
+        Route::delete('/visits/{visit}', [VisitController::class, 'destroy'])->name('visits.destroy');
 
         // Inventory
         Route::resource('inventory', MedicineController::class);
