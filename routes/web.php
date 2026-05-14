@@ -11,6 +11,8 @@ Route::get('/', function () {
 
 use App\Http\Controllers\VisitController;
 
+use App\Http\Controllers\MedicineController;
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         if (auth()->user()->role === 'admin') {
@@ -27,6 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
         Route::get('/visits/create', [VisitController::class, 'create'])->name('visits.create');
         Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
+
+        // Inventory
+        Route::resource('inventory', MedicineController::class);
     });
 
     // Student Routes
