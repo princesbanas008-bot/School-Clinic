@@ -18,7 +18,8 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-semibold mb-4">Recent Visits</h3>
                     <div class="text-center py-8 text-gray-500 italic">
-                        No health records found. Stay healthy!
+                        <p class="mb-4">No health records found. Stay healthy!</p>
+                        <a href="{{ route('student.visits.history') }}" class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition not-italic">View Full History</a>
                     </div>
                 </div>
             </div>

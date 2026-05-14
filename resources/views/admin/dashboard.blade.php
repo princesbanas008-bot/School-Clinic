@@ -33,9 +33,9 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
                     <div class="flex flex-wrap gap-4">
-                        <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">Record New Visit</button>
+                        <a href="{{ route('admin.visits.create') }}" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">Record New Visit</a>
                         <button class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition">Add Medicine</button>
-                        <button class="px-4 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700 transition">View All History</button>
+                        <a href="{{ route('admin.visits.index') }}" class="px-4 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700 transition">View All History</a>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+use App\Http\Controllers\VisitController;
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         if (auth()->user()->role === 'admin') {
@@ -20,11 +22,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Admin Routes
     Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        
+        // Visits
+        Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
+        Route::get('/visits/create', [VisitController::class, 'create'])->name('visits.create');
+        Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
     });
 
     // Student Routes
     Route::middleware(['role:student'])->prefix('student')->name('student.')->group(function () {
         Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('dashboard');
+        
+        // Visits
+        Route::get('/visits/history', [VisitController::class, 'studentHistory'])->name('visits.history');
     });
 });
 

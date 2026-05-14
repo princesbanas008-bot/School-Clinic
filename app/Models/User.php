@@ -63,4 +63,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the visits for the student.
+     */
+    public function visits()
+    {
+        return $this->hasMany(Visit::class, 'student_id');
+    }
 }
